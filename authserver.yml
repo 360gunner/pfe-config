@@ -1,0 +1,60 @@
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+security:
+  user:
+    password: password
+server:
+  contextPath: /elit
+  port: 9999
+spring:
+  datasource:
+#    continue-on-error: true
+    password: '1998'
+    testWhileIdle: true
+    url: jdbc:postgresql://localhost:5432/AuthServerPresentation
+    username: 'postgres'
+    validationQuery: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: update
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  sleuth:
+    sampler:
+      percentage: 0.5
+  application:
+    name: authserver
+#  zipkin:
+#    base-url: http://zipkin:9411
+    
+#  datasource:
+#    password: 'root'
+#    testWhileIdle: true
+#    url: jdbc:mysql://localhost:3306/springtest?useSSL=false&serverTimezone=UTC&useLegacyDatetimeCode=false
+#    username: 'root'
+#    validationQuery: SELECT 1
+#  jpa:
+#    hibernate:
+#      ddl-auto: update
+#      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+#    properties:
+#      hibernate:
+#        dialect: org.hibernate.dialect.MySQL5Dialect
+#    show-sql: true
+
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+  

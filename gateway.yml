@@ -1,0 +1,55 @@
+spring:
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  sleuth:
+    sampler:
+      percentage: 0.5
+  aop:
+    proxy-target-class: true
+  application:
+    name: gateway
+#  zipkin:
+#    base-url: http://zipkin:9411
+security:
+  user:
+    password: none
+  ignored:
+  - "*.bundle.*"
+  oauth2:
+    client:
+      accessTokenUri: http://localhost:9999/elit/oauth/token
+      userAuthorizationUri: http://localhost:9999/elit/oauth/authorize
+#      accessTokenUri: http://authserver/elit/oauth/token
+#      userAuthorizationUri: http://authserver/elit/oauth/authorize
+      clientId: Kentache
+      clientSecret: amira9696
+    resource:
+      jwt:
+        keyValue: |
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApx2Gzy3EJfPOb4Xd7NZrTdeAk7RLdm/AzL7J5HDRDtQOXacv/JilwFseJPBecitmLadXd30y17fwt8bhJ4fWJevYYpTf8c1RZqt6IuCPno2+O0ZwT85kL70bCAE0kdWth0VF47iv4zds5nWiI8erFAq5f4HIke48QJJJtPxOVKbAZVb5sVkl68/stSC2pAiTQcSD3mDBDJryMVuk5SQDM1XcdhKH4zVaG6jJVS3IxaHfGtiYX2FZdEITCRqWZxI6A+XhNCsCB2VWQO+6M3B6NEyKj/IPDY4/dEXttQuSO0y/ddqKnUoxOhFLemT5OflqQJgpgbXbpNJQwYT84PN0HQIDAQAB
+          -----END PUBLIC KEY-----
+
+zuul:
+  routes:
+    maintenance:
+      path: /maintenance/**
+      service-id: maintenance
+    stock:
+      path: /stock/**
+      service-id: stock
+    authserver:
+      path: /oauth2/**
+      service-id: authserver
+
+logging:
+  level:
+    org.springframework.security: DEBUG
+    
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/

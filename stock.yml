@@ -1,0 +1,53 @@
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka/
+logging:
+  level:
+    org:
+      springframework:
+        security: DEBUG
+security:
+  oauth2:
+    resource:
+      jwt:
+        keyValue: |-
+          -----BEGIN PUBLIC KEY-----
+          MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEApx2Gzy3EJfPOb4Xd7NZrTdeAk7RLdm/AzL7J5HDRDtQOXacv/JilwFseJPBecitmLadXd30y17fwt8bhJ4fWJevYYpTf8c1RZqt6IuCPno2+O0ZwT85kL70bCAE0kdWth0VF47iv4zds5nWiI8erFAq5f4HIke48QJJJtPxOVKbAZVb5sVkl68/stSC2pAiTQcSD3mDBDJryMVuk5SQDM1XcdhKH4zVaG6jJVS3IxaHfGtiYX2FZdEITCRqWZxI6A+XhNCsCB2VWQO+6M3B6NEyKj/IPDY4/dEXttQuSO0y/ddqKnUoxOhFLemT5OflqQJgpgbXbpNJQwYT84PN0HQIDAQAB
+          -----END PUBLIC KEY-----
+server:
+  port: 9002
+spring:
+  datasource:
+    continue-on-error: true
+    password: '1998'
+    testWhileIdle: true
+    url: jdbc:postgresql://localhost:5432/demande2
+    username: 'postgres'
+    validationQuery: SELECT 1
+  jpa:
+    hibernate:
+      ddl-auto: none
+      naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+    show-sql: true
+  rabbitmq:
+    host: localhost
+    port: 5672
+    username: guest
+    password: guest
+  sleuth:
+    sampler:
+      percentage: 0.5
+  application:
+    name: stock
+#  zipkin:
+#    base-url: http://zipkin:9411
+    
+management:
+  endpoints:
+    web:
+      exposure:
+        include: hystrix.stream, info, health
